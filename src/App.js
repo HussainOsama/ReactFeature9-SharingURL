@@ -14,6 +14,7 @@ import NavBar from "./components/NavBar";
 import ProductDetail from "./components/ProductDetail";
 import ProductList from "./components/ProductList";
 import { ThemeProvider } from "styled-components";
+import { Route, Switch } from "react-router";
 // Data
 import products from "./products";
 
@@ -74,8 +75,28 @@ function App() {
     <ThemeProvider theme={theme[currentTheme]}>
       <GlobalStyle />
       <NavBar currentTheme={currentTheme} toggleTheme={toggleTheme} />
-      <Home />
-      {setView()}
+
+      <Switch>
+        <Route exact path="/products/:productId">
+          <ProductDetail
+            product={_products}
+            deleteProduct={deleteProduct}
+            selectProduct={selectProduct}
+          />
+        </Route>
+
+        <Route exact path="/products">
+          <ProductList
+            products={_products}
+            deleteProduct={deleteProduct}
+            selectProduct={selectProduct}
+          />
+        </Route>
+
+        <Route exact path="/">
+          <Home />
+        </Route>
+      </Switch>
     </ThemeProvider>
   );
 }
