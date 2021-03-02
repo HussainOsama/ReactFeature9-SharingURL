@@ -36,15 +36,6 @@ const theme = {
 function App() {
   const [currentTheme, setCurrentTheme] = useState("light");
   const [product, setProduct] = useState(null);
-  const [_products, setProducts] = useState(products);
-
-  const deleteProduct = (productId) => {
-    const updatedProducts = _products.filter(
-      (product) => product.id !== +productId
-    );
-    setProducts(updatedProducts);
-    setProduct(null);
-  };
 
   const selectProduct = (productId) => {
     const selectedProduct = products.find(
@@ -58,17 +49,9 @@ function App() {
 
   const setView = () =>
     product ? (
-      <ProductDetail
-        product={product}
-        deleteProduct={deleteProduct}
-        selectProduct={selectProduct}
-      />
+      <ProductDetail product={product} selectProduct={selectProduct} />
     ) : (
-      <ProductList
-        products={_products}
-        deleteProduct={deleteProduct}
-        selectProduct={selectProduct}
-      />
+      <ProductList selectProduct={selectProduct} />
     );
 
   return (
@@ -78,19 +61,11 @@ function App() {
 
       <Switch>
         <Route exact path="/products/:productId">
-          <ProductDetail
-            product={_products}
-            deleteProduct={deleteProduct}
-            selectProduct={selectProduct}
-          />
+          <ProductDetail selectProduct={selectProduct} />
         </Route>
 
         <Route exact path="/products">
-          <ProductList
-            products={_products}
-            deleteProduct={deleteProduct}
-            selectProduct={selectProduct}
-          />
+          <ProductList selectProduct={selectProduct} />
         </Route>
 
         <Route exact path="/">

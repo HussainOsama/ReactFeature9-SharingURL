@@ -3,13 +3,16 @@ import DeleteButton from "./buttons/DeleteButton";
 // Styling
 import { DetailWrapper } from "../styles";
 
-import { Link, Redirect, useParams } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
+
+import productStore from "../stores/productStore";
+import { observer } from "mobx-react";
 
 const ProductDetail = (props) => {
   const productId = useParams().productId;
-  console.log(productId);
-  const product = props.product[productId - 1];
-
+  const product = productStore.products.find(
+    (product) => product.id === +productId
+  );
   if (!product) return <Redirect to="/products" />;
 
   return (
@@ -19,12 +22,9 @@ const ProductDetail = (props) => {
       <img src={product.image} alt={product.name} />
       <p>{product.description}</p>
       <p>{product.price} KD</p>
-      <DeleteButton
-        productId={product.id}
-        deleteProduct={props.deleteProduct}
-      />
+      <DeleteButton productId={product.id} />
     </DetailWrapper>
   );
 };
 
-export default ProductDetail;
+export default observer(ProductDetail);
