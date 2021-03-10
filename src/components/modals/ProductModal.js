@@ -65,7 +65,7 @@ const ProductModal = (props) => {
           <input
             type="text"
             className="form-control"
-            name="img"
+            name="image"
             onChange={handleChange}
           />
         </div>
