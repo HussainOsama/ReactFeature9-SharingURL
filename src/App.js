@@ -1,11 +1,5 @@
 // Styling
-import {
-  Description,
-  GlobalStyle,
-  ShopImage,
-  ThemeButton,
-  Title,
-} from "./styles";
+import { GlobalStyle } from "./styles";
 import React, { useState } from "react";
 
 import Home from "./components/Home";
@@ -47,12 +41,12 @@ function App() {
   const toggleTheme = () =>
     setCurrentTheme(currentTheme === "light" ? "dark" : "light");
 
-  const setView = () =>
-    product ? (
-      <ProductDetail product={product} selectProduct={selectProduct} />
-    ) : (
-      <ProductList selectProduct={selectProduct} />
-    );
+  // const setView = () =>
+  //   product ? (
+  //     <ProductDetail product={product} selectProduct={selectProduct} />
+  //   ) : (
+  //     <ProductList selectProduct={selectProduct} />
+  //   );
 
   return (
     <ThemeProvider theme={theme[currentTheme]}>
