@@ -5,19 +5,19 @@ import { CreateButtonStyled } from "../../styles";
 
 const ProductModal = (props) => {
   const [product, setProduct] = useState({
-    name: "",
+    name: "PlaceHolder",
     price: 0,
-    description: "",
-    image: "",
+    description: "PlaceHolder",
+    image: "https://via.placeholder.com/150",
   });
 
   const handleChange = (event) => {
     setProduct({ ...product, [event.target.name]: event.target.value });
-    console.log(product);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log(product);
     productStore.createProduct(product);
     props.closeModal();
   };

@@ -41,13 +41,6 @@ function App() {
   const toggleTheme = () =>
     setCurrentTheme(currentTheme === "light" ? "dark" : "light");
 
-  // const setView = () =>
-  //   product ? (
-  //     <ProductDetail product={product} selectProduct={selectProduct} />
-  //   ) : (
-  //     <ProductList selectProduct={selectProduct} />
-  //   );
-
   return (
     <ThemeProvider theme={theme[currentTheme]}>
       <GlobalStyle />

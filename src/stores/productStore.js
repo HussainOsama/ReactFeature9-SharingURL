@@ -13,6 +13,7 @@ class ProductStore {
     });
   }
 
+  //Works
   fetchProducts = async () => {
     try {
       const res = await axios.get("http://localhost:8000/products");
@@ -22,15 +23,33 @@ class ProductStore {
     }
   };
 
-  deleteProduct = (productId) => {
-    this.products = this.products.filter((product) => productId !== product.id);
+  //Works
+  deleteProduct = async (productId) => {
+    try {
+      axios.delete(`http://localhost:8000/products/${productId}`);
+      this.products = this.products.filter(
+        (product) => productId !== product.id
+      );
+    } catch (error) {
+      console.log("CookieStore -> deleteCookie -> error", error);
+    }
   };
 
-  createProduct = (product) => {
-    product.id = products[products.length - 1].id + 1;
-    product.slug = slugify(product.name);
-    this.products.push(product);
+  createProduct = async (product) => {
+    // product.id = products[products.length - 1].id + 1;
+    // product.slug = slugify(product.name);
+    // this.products.push(product);
+
+    try {
+      console.log(product);
+      const res = await axios.post("http://localhost:8000/products", product);
+      this.products.push(res.data);
+    } catch (error) {
+      console.log("CookieStore -> createCookie -> error", error);
+    }
   };
+
+  // Still need Update function
 }
 
 let productStore = new ProductStore();
